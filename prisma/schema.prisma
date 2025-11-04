@@ -9,3 +9,18 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model attack {
+  id        String   @id @default(uuid())
+  name      String
+  tactic    String
+  technique_id String
+  technique_name String
+  payload String[]
+  platform String
+  command String
+  description String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+ 
