@@ -18,7 +18,7 @@ model attack {
   technique_name String
   payload Json
   platform String
-  command String
+  command String @db.MediumText
   description String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
