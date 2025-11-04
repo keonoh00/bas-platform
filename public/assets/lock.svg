@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="30" viewBox="0 0 22 30">
+  <g id="Security14" transform="translate(-5 -1)">
+    <g id="그룹_110" data-name="그룹 110">
+      <g id="그룹_109" data-name="그룹 109">
+        <path id="패스_47" data-name="패스 47" d="M23,17H9a1,1,0,0,1-1-1V9A8,8,0,0,1,24,9v7A1,1,0,0,1,23,17ZM10,15H22V9A6,6,0,0,0,10,9Z" fill="#ffc10a"/>
+      </g>
+    </g>
+    <g id="그룹_112" data-name="그룹 112">
+      <g id="그룹_111" data-name="그룹 111">
+        <path id="패스_48" data-name="패스 48" d="M27,16v6a9.014,9.014,0,0,1-9,9H14a9.014,9.014,0,0,1-9-9V16a1,1,0,0,1,1-1H26A1,1,0,0,1,27,16Z" fill="#2197f3"/>
+      </g>
+    </g>
+    <path id="패스_49" data-name="패스 49" d="M19,21a3.01,3.01,0,0,1-2,2.82V26a1,1,0,0,1-2,0V23.82A3,3,0,1,1,19,21Z" fill="#fff"/>
+  </g>
+</svg>
