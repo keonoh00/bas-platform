@@ -6,7 +6,11 @@
     "dev": "next dev --turbo",
     "build": "next build",
     "lint": "next lint",
-    "docker:up": "docker compose up -d"
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^6.18.0",
