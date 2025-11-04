@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
-    "lint": "next lint"
+    "lint": "next lint",
+    "docker:up": "docker compose up -d"
   },
   "dependencies": {
     "@xyflow/react": "^12.6.0",
