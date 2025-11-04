@@ -1,10 +1,10 @@
 services:
   mysql:
     image: mysql:9.5.0
-    container_name: mysql
+    container_name: attack-db
     restart: always
     ports:
-      - "3306:3306" # 포트번호 host:docker 로컬 포트에 도커 포트를 마운트
+      - "3306:3306"
     volumes:
       - ./db/mysql/data:/var/lib/mysql
     environment:
