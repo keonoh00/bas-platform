@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm run start:server:dev\" \"next dev --turbo\"",
+    "dev": "next dev --turbo",
     "build": "next build",
-    "start": "npm run build && concurrently \"npx ts-node --project tsconfig.server.json server/index.ts\" \"next start -p 3001 -H 0.0.0.0\"",
-    "lint": "next lint",
-    "start:server:dev": "nodemon server/index.ts"
+    "lint": "next lint"
   },
   "dependencies": {
     "@xyflow/react": "^12.6.0",
