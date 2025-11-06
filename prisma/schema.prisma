@@ -19,7 +19,7 @@ model attack {
   payload Json
   platform String
   command String @db.MediumText
-  description String
+  description String @db.LongText
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
