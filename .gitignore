@@ -3,6 +3,10 @@
 # db
 db/mysql/data
 
+# data
+prisma/data.json
+prisma/data.csv
+
 # dependencies
 /node_modules
 /.pnp
