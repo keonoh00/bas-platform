@@ -10,17 +10,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model attack {
-  id        String   @id @default(uuid())
-  name      String
-  tactic    String
-  technique_id String
-  technique_name String
-  payload Json
-  platform String
-  command String @db.MediumText
-  description String @db.LongText
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+model Ability {
+  id              String   @id @default(uuid())
+  ability_id      String   @unique @db.VarChar(191)
+  ability_name    String
+  description     String @db.LongText
+  tactic          String
+  technique_id    String
+  technique_name  String
+  platform        String
+  shell_type      String
+  command         String @db.MediumText
+  payload         String @db.LongText
+  type            String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
  
