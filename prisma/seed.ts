@@ -1,19 +1,22 @@
 import { PrismaClient } from "@/prisma/client";
-import seed from "./seed.json";
+import seed from "./data.json";
 
 const prisma = new PrismaClient();
 async function main() {
   for (const attack of seed) {
-    await prisma.attack.create({
+    await prisma.ability.create({
       data: {
-        name: attack.name,
+        ability_id: attack.id,
+        ability_name: attack.ability_name,
         tactic: attack.tactic,
         technique_id: attack.technique_id,
         technique_name: attack.technique_name,
         payload: attack.payloads,
         platform: attack.platform,
         command: attack.command,
-        description: "",
+        shell_type: attack.shell_type,
+        type: attack.type,
+        description: attack.description ?? "",
       },
     });
   }
