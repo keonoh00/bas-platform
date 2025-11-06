@@ -1,0 +1,11 @@
+services:
+  mysql:
+    image: mysql:9.5.0
+    container_name: attack-db
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
