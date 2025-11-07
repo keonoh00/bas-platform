@@ -1,21 +1,7 @@
 "use client";
 
-import React, {
-  useRef,
-  forwardRef,
-  useImperativeHandle,
-  useState,
-  ReactNode,
-} from "react";
-import {
-  Database,
-  FlaskConical,
-  Gauge,
-  ChevronDown,
-  ChevronRight,
-  MenuIcon,
-  Server,
-} from "lucide-react";
+import React, { useRef } from "react";
+import { Database, FlaskConical, Gauge, MenuIcon, Server } from "lucide-react";
 import { MenuItemType, Sidebar, SidebarRef } from "./SideBar";
 import Topbar from "./TopBar";
 import { usePathname } from "next/navigation";
