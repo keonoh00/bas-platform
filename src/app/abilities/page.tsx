@@ -2,29 +2,25 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { SaveIcon, Trash2 } from "lucide-react";
-import { DefendTable } from "@/components/DefendTable/DefendTable";
-import { AttackResponse, fetchAttacks } from "@/api/defend/defend";
 import SearchInput from "@/components/common/SearchInput/SearchInput";
 import Loading from "@/components/common/Loading/Loading";
 import { Pagination } from "@/components/common/Pagination/Pagination";
+import trpc from "@/lib/trpc";
+import { Ability } from "@/prisma";
+import { AbilityTable } from "@/components/page/abilities/AbilityTable";
 
-export default function Defend() {
-  const [data, setData] = useState<AttackResponse | undefined>();
+export default function Abilities() {
+  const [data, setData] = useState<Ability[] | undefined>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [query, setQuery] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const totalPages = data
-    ? Math.ceil(
-        Number(data.pagenation?.total_items) /
-          Number(data.pagenation?.items_per_page)
-      )
-    : 1;
+  const totalPages = data ? Math.ceil(Number(data.length) / 10) : 1;
 
   const fetchData = useCallback(async (page = 1, search = "") => {
     setIsLoading(true);
     try {
-      const response = await fetchAttacks({ page, query: search });
+      const response = await trpc.abilities.list.query({ page, pageSize: 10 });
       setData(response);
     } catch (error) {
       console.error("Failed to fetch data:", error);
@@ -76,7 +72,7 @@ export default function Defend() {
           <Loading />
         ) : data ? (
           <>
-            <DefendTable data={data} />
+            <AbilityTable data={data} />
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}

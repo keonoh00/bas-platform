@@ -1,14 +1,11 @@
+import { Ability } from "@/prisma";
 import { useState } from "react";
-import { AttackDataItem } from "@/api/defend/defend";
-import { HeatmapEvaluationFramework } from "@/api/evaluate/types";
 
 interface GeneralTabProps {
-  data: AttackDataItem;
+  data: Ability;
 }
 
 export const GeneralTab: React.FC<GeneralTabProps> = ({ data }) => {
-  const [state, setState] = useState(data.mitre_domain);
-
   return (
     <div className="space-y-6">
       {/* Grid Inputs */}
@@ -18,7 +15,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = ({ data }) => {
           <input
             className="bg-base-800 p-2 rounded border border-base-850"
             placeholder="ID"
-            defaultValue={data.tactic}
+            defaultValue={data.ability_id}
           />
         </div>
         <div className="flex flex-col md:col-span-2">
@@ -26,7 +23,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = ({ data }) => {
           <input
             className="bg-base-800 p-2 rounded border border-base-850"
             placeholder="UID"
-            defaultValue={data.ability_id}
+            defaultValue={data.technique_id}
           />
         </div>
         <div className="flex flex-col col-span-1">
@@ -34,7 +31,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = ({ data }) => {
           <input
             className="bg-base-800 p-2 rounded border border-base-850"
             placeholder="Name"
-            defaultValue={data.name}
+            defaultValue={data.ability_name}
           />
         </div>
       </div>
@@ -54,7 +51,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = ({ data }) => {
       <div>
         <label className="text-sm font-bold mb-2 block">State</label>
         <div className="flex gap-6">
-          {Object.values(HeatmapEvaluationFramework).map((val) => (
+          {/* {Object.values(HeatmapEvaluationFramework).map((val) => (
             <label key={val} className="inline-flex items-center space-x-2">
               <input
                 type="radio"
@@ -66,7 +63,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = ({ data }) => {
               />
               <span>{val}</span>
             </label>
-          ))}
+          ))} */}
         </div>
       </div>
 
@@ -94,7 +91,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = ({ data }) => {
         <textarea
           className="bg-base-800 p-2 rounded w-full border border-base-850"
           rows={3}
-          defaultValue={data.threat_group}
+          defaultValue={data.description}
         ></textarea>
       </div>
 
@@ -108,7 +105,7 @@ export const GeneralTab: React.FC<GeneralTabProps> = ({ data }) => {
         <textarea
           className="bg-base-800 p-2 rounded w-full border border-base-850"
           rows={3}
-          defaultValue={data.cve_info}
+          defaultValue={data.description}
         ></textarea>
       </div>
     </div>
