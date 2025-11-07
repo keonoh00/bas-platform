@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 export default function ServerConfigEditor() {
   return (
     <div className="border p-4 rounded-md flex flex-col gap-4">

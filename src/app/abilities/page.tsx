@@ -7,7 +7,7 @@ import Loading from "@/components/common/Loading/Loading";
 import { Pagination } from "@/components/common/Pagination/Pagination";
 import trpc from "@/lib/trpc";
 import { Ability } from "@/prisma";
-import { AbilityTable } from "@/components/page/abilities/AbilityTable";
+import { AbilityTable } from "@/components/page/abilities/AbilitiesTable";
 
 export default function Abilities() {
   const [data, setData] = useState<Ability[] | undefined>();
