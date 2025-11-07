@@ -18,22 +18,22 @@ export default function Abilities() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [totalPages, setTotalPages] = useState<number>(0);
 
-  useEffect(() => {
-    const fetchTotalPages = async () => {
-      const response = await trpc.abilities.count.query();
-      setTotalPages(Math.ceil(Number(response) / PAGE_SIZE));
-    };
-    fetchTotalPages();
-  }, []);
-
   const fetchData = useCallback(async (page = 1, search = "") => {
     setIsLoading(true);
     try {
-      const response = await trpc.abilities.list.query({
-        page,
-        pageSize: PAGE_SIZE,
-      });
-      setData(response);
+      let response: { abilities: Ability[]; count: number } | undefined;
+      if (search) {
+        response = await trpc.abilities.search.query({ query: search });
+      } else {
+        response = await trpc.abilities.list.query({
+          page,
+          pageSize: PAGE_SIZE,
+        });
+      }
+      if (response) {
+        setData(response.abilities);
+        setTotalPages(Math.ceil(Number(response.count) / PAGE_SIZE));
+      }
     } catch (error) {
       console.error("Failed to fetch data:", error);
       setData(undefined);

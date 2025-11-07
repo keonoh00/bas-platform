@@ -24,16 +24,56 @@ export const appRouter = router({
       .query(async ({ input }) => {
         const pageNumber = input?.page ?? 1;
         const pageSize = input?.pageSize ?? 10;
-        const abilities = await prisma.ability.findMany({
-          skip: (pageNumber - 1) * pageSize,
-          take: pageSize,
-        });
-        return abilities;
+        const [abilities, count] = await prisma.$transaction([
+          prisma.ability.findMany({
+            skip: (pageNumber - 1) * pageSize,
+            take: pageSize,
+          }),
+          prisma.ability.count(),
+        ]);
+
+        return { abilities, count };
       }),
-    count: publicProcedure.query(async () => {
-      const count = await prisma.ability.count();
-      return count;
-    }),
+
+    search: publicProcedure
+      .input(
+        z.object({
+          query: z.string().min(1),
+          page: z.number().int().positive().default(1),
+          pageSize: z.number().int().positive().max(100).default(10),
+        })
+      )
+      .query(async ({ input }) => {
+        const pageNumber = input?.page ?? 1;
+        const pageSize = input?.pageSize ?? 10;
+        const query = input?.query ?? "";
+        const [abilities, count] = await prisma.$transaction([
+          prisma.ability.findMany({
+            where: {
+              OR: [
+                { ability_name: { contains: query } },
+                { ability_id: { contains: query } },
+                { tactic: { contains: query } },
+                { technique_name: { contains: query } },
+              ],
+            },
+            skip: (pageNumber - 1) * pageSize,
+            take: pageSize,
+          }),
+          prisma.ability.count({
+            where: {
+              OR: [
+                { ability_name: { contains: query } },
+                { ability_id: { contains: query } },
+                { tactic: { contains: query } },
+                { technique_name: { contains: query } },
+              ],
+            },
+          }),
+        ]);
+
+        return { abilities, count };
+      }),
   }),
 
   agents: router({
