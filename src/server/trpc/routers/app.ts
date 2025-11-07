@@ -30,6 +30,10 @@ export const appRouter = router({
         });
         return abilities;
       }),
+    count: publicProcedure.query(async () => {
+      const count = await prisma.ability.count();
+      return count;
+    }),
   }),
 
   agents: router({
