@@ -79,24 +79,24 @@ export default function Abilities() {
       </div>
 
       {/* Main Content */}
-      <div className="mt-4 flex flex-col space-y-6">
+      <div className="mt-4 flex flex-col space-y-6 min-h-[700px]">
         {isLoading ? (
           <Loading />
         ) : data ? (
-          <>
-            <AbilityTable data={data} />
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
-          </>
+          <AbilityTable data={data} />
         ) : (
           <div className="text-center text-gray-400 py-8">
             No Data Available
           </div>
         )}
       </div>
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 }
