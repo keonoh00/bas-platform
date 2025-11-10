@@ -1,4 +1,4 @@
-import { PrismaClient } from "@/prisma/client";
+import { PrismaClient } from "~/prisma/client";
 import seed from "./data.json";
 
 const filterX = (data: string): string => {

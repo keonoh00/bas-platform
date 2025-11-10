@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Table, TableColumn } from "@/components/common/Table/Table";
-import { Ability } from "@/prisma";
+import { Table, TableColumn } from "~/components/common/Table/Table";
+import { Ability } from "~/prisma";
 import AbilityModal from "./AbilityModal";
 
 interface AbilityTableProps {

@@ -5,8 +5,8 @@ import { GeneralTab } from "./GeneralTab";
 import { ExecutorsTab } from "./ExecutorsTab";
 import { RequirementTab } from "./RequirementTab";
 import { ConfigurationTab } from "./ConfigurationTab";
-import { AttackDataItem } from "@/api/defend/defend";
-import { Modal } from "@/components/common/Modal/Modal";
+import { AttackDataItem } from "~/api/defend/defend";
+import { Modal } from "~/components/common/Modal/Modal";
 
 enum AbilityModalTabs {
   General = "General",

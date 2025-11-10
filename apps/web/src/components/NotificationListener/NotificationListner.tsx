@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import { useToast } from "@/components/ToastProvider/ToastProvider";
-import { ws } from "@/lib/WebSocketService";
+import { useToast } from "~/components/ToastProvider/ToastProvider";
+import { ws } from "~/lib/WebSocketService";
 
 export default function NotificationListener() {
   const showToast = useToast();

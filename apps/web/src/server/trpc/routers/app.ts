@@ -1,6 +1,6 @@
 import { router, publicProcedure } from "../init";
 import { z } from "zod";
-import prisma from "@/lib/prisma";
+import prisma from "~/lib/prisma";
 
 export const appRouter = router({
   hello: publicProcedure

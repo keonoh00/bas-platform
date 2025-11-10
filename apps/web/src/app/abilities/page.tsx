@@ -2,12 +2,12 @@
 
 import { useEffect, useState, useCallback } from "react";
 import { SaveIcon, Trash2 } from "lucide-react";
-import SearchInput from "@/components/common/SearchInput/SearchInput";
-import Loading from "@/components/common/Loading/Loading";
-import { Pagination } from "@/components/common/Pagination/Pagination";
-import trpc from "@/lib/trpc";
-import { Ability } from "@/prisma";
-import { AbilityTable } from "@/components/page/abilities/AbilitiesTable";
+import SearchInput from "~/components/common/SearchInput/SearchInput";
+import Loading from "~/components/common/Loading/Loading";
+import { Pagination } from "~/components/common/Pagination/Pagination";
+import trpc from "~/lib/trpc";
+import { Ability } from "~/prisma";
+import { AbilityTable } from "~/components/page/abilities/AbilitiesTable";
 
 const PAGE_SIZE = 10;
 

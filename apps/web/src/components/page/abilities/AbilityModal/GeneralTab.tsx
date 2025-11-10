@@ -1,4 +1,4 @@
-import { Ability } from "@/prisma";
+import { Ability } from "~/prisma";
 import { useState } from "react";
 
 interface GeneralTabProps {
