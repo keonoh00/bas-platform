@@ -1,6 +1,8 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { appRouter } from "~/server/trpc/routers/app";
 import { createContext } from "~/server/trpc/init";
+// Validate environment variables at startup
+import "~/config/env";
 
 const handler = (req: Request) =>
   fetchRequestHandler({
