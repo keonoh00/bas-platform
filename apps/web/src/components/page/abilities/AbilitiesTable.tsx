@@ -1,17 +1,17 @@
 import React, { useState } from "react";
 import { Table, TableColumn } from "~/components/common/Table/Table";
-import { Ability } from "~/prisma";
 import AbilityModal from "./AbilityModal";
+import type { AbilitiesListResponse } from "~/app/abilities/page";
 
-interface AbilityTableProps {
-  data: Ability[];
-}
-
-export const AbilityTable: React.FC<AbilityTableProps> = ({ data }) => {
-  const [modalData, setModalData] = useState<Ability | null>(null);
+export const AbilitiesTable: React.FC<{
+  data: AbilitiesListResponse["abilities"];
+}> = ({ data }) => {
+  const [modalData, setModalData] = useState<
+    AbilitiesListResponse["abilities"][number] | null
+  >(null);
   const [open, setOpen] = useState(false);
 
-  const columns: TableColumn<Ability>[] = [
+  const columns: TableColumn<AbilitiesListResponse["abilities"][number]>[] = [
     {
       label: "Ability Name",
       render: (item) => (
@@ -36,7 +36,7 @@ export const AbilityTable: React.FC<AbilityTableProps> = ({ data }) => {
     },
   ];
 
-  const onOpen = (item: Ability) => {
+  const onOpen = (item: AbilitiesListResponse["abilities"][number]) => {
     setModalData(item);
     const timeout = setTimeout(() => setOpen(true), 100); // match animation duration
     return () => clearTimeout(timeout);
