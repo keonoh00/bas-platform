@@ -10,3 +10,5 @@ const trpc = createTRPCProxyClient<AppRouter>({
 });
 
 export default trpc;
+
+export type { AppRouter };
