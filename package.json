@@ -10,6 +10,8 @@
     "dev": "yarn workspace @bas-platform/web dev",
     "lint": "yarn workspaces foreach run lint",
     "docker:up": "docker compose up -d",
-    "docker:down": "docker compose down"
+    "docker:down": "docker compose down",
+    "prisma:generate": "yarn workspace @bas-platform/prisma prisma:generate",
+    "prisma:seed": "yarn workspace @bas-platform/prisma prisma:sseed"
   }
 }
