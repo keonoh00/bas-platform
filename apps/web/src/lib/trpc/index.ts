@@ -10,3 +10,6 @@ const trpc = createTRPCProxyClient<AppRouter>({
 });
 
 export default trpc;
+
+export type { AppRouter };
+export type { RouterOutputs, RouterInputs, TRPCError } from "./types";

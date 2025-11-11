@@ -5,14 +5,17 @@ import { SaveIcon, Trash2 } from "lucide-react";
 import SearchInput from "~/components/common/SearchInput/SearchInput";
 import Loading from "~/components/common/Loading/Loading";
 import { Pagination } from "~/components/common/Pagination/Pagination";
-import trpc from "~/lib/trpc";
-import { Ability } from "~/prisma";
-import { AbilityTable } from "~/components/page/abilities/AbilitiesTable";
+import trpc, { type RouterOutputs } from "~/lib/trpc";
+import { AbilitiesTable } from "~/components/page/abilities/AbilitiesTable";
 
 const PAGE_SIZE = 10;
 
+export type AbilitiesListResponse = RouterOutputs["abilities"]["list"];
+
 export default function Abilities() {
-  const [data, setData] = useState<Ability[] | undefined>();
+  const [data, setData] = useState<
+    AbilitiesListResponse["abilities"] | undefined
+  >();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [query, setQuery] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -21,9 +24,13 @@ export default function Abilities() {
   const fetchData = useCallback(async (page = 1, search = "") => {
     setIsLoading(true);
     try {
-      let response: { abilities: Ability[]; count: number } | undefined;
+      let response: AbilitiesListResponse | undefined;
       if (search) {
-        response = await trpc.abilities.search.query({ query: search });
+        response = await trpc.abilities.search.query({
+          query: search,
+          page,
+          pageSize: PAGE_SIZE,
+        });
       } else {
         response = await trpc.abilities.list.query({
           page,
@@ -83,7 +90,7 @@ export default function Abilities() {
         {isLoading ? (
           <Loading />
         ) : data ? (
-          <AbilityTable data={data} />
+          <AbilitiesTable data={data} />
         ) : (
           <div className="text-center text-gray-400 py-8">
             No Data Available
