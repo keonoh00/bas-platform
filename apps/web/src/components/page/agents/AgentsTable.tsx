@@ -53,13 +53,5 @@ export const AgentsTable: React.FC<AgentsTableProps> = ({ data }) => {
     },
   ];
 
-  return (
-    <>
-      {data ? (
-        <Table data={data} columns={columns} />
-      ) : (
-        <span className="text-center">No Data Available</span>
-      )}
-    </>
-  );
+  return <Table data={data} columns={columns} />;
 };

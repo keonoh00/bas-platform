@@ -18,7 +18,6 @@ export const abilitiesRouter = router({
         prisma.ability.count(),
       ]);
 
-      // Transform Date objects to ISO strings to match the output schema
       const transformedAbilities = abilities.map((ability) => ({
         ...ability,
         createdAt: ability.createdAt.toISOString(),
@@ -54,7 +53,6 @@ export const abilitiesRouter = router({
         }),
       ]);
 
-      // Transform Date objects to ISO strings to match the output schema
       const transformedAbilities = abilities.map((ability) => ({
         ...ability,
         createdAt: ability.createdAt.toISOString(),
