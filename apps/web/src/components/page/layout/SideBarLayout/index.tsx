@@ -10,7 +10,7 @@ const MENU_ITEMS: MenuItemType[] = [
   { name: "Dashboard", icon: <Gauge />, url: "/" },
   { name: "Agents", icon: <Server />, url: "/agents" },
   { name: "Abilities", icon: <Database />, url: "/abilities" },
-  { name: "Playground", icon: <FlaskConical />, url: "/assessment" },
+  { name: "Playground", icon: <FlaskConical />, url: "/playground" },
 ];
 
 export default function SideBarLayout({
