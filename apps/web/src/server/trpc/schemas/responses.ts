@@ -56,3 +56,50 @@ export const agentSchema = z.object({
 });
 
 export const agentsListResponseSchema = z.array(agentSchema);
+
+// Statistics schemas
+export const abilityStatisticsSchema = z.object({
+  totalCount: z.number().int().nonnegative(),
+  byTactic: z.array(
+    z.object({
+      name: z.string(),
+      value: z.number().int().nonnegative(),
+    })
+  ),
+  byPlatform: z.array(
+    z.object({
+      name: z.string(),
+      value: z.number().int().nonnegative(),
+    })
+  ),
+  byType: z.array(
+    z.object({
+      name: z.string(),
+      value: z.number().int().nonnegative(),
+    })
+  ),
+});
+
+export const agentStatisticsSchema = z.object({
+  totalCount: z.number().int().nonnegative(),
+  trustedCount: z.number().int().nonnegative(),
+  untrustedCount: z.number().int().nonnegative(),
+  byPlatform: z.array(
+    z.object({
+      name: z.string(),
+      value: z.number().int().nonnegative(),
+    })
+  ),
+  byGroup: z.array(
+    z.object({
+      name: z.string(),
+      value: z.number().int().nonnegative(),
+    })
+  ),
+  byPrivilege: z.array(
+    z.object({
+      name: z.string(),
+      value: z.number().int().nonnegative(),
+    })
+  ),
+});
