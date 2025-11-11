@@ -32,31 +32,25 @@ export const abilitiesRouter = router({
     .input(searchQuerySchema)
     .output(paginatedAbilitiesResponseSchema)
     .query(async ({ input }) => {
-      const pageNumber = input?.page ?? 1;
-      const pageSize = input?.pageSize ?? 10;
-      const query = input?.query ?? "";
+      const pageNumber = input.page;
+      const pageSize = input.pageSize;
+      const query = input.query;
+      const whereClause = {
+        OR: [
+          { ability_name: { contains: query } },
+          { ability_id: { contains: query } },
+          { tactic: { contains: query } },
+          { technique_name: { contains: query } },
+        ],
+      };
       const [abilities, count] = await prisma.$transaction([
         prisma.ability.findMany({
-          where: {
-            OR: [
-              { ability_name: { contains: query } },
-              { ability_id: { contains: query } },
-              { tactic: { contains: query } },
-              { technique_name: { contains: query } },
-            ],
-          },
+          where: whereClause,
           skip: (pageNumber - 1) * pageSize,
           take: pageSize,
         }),
         prisma.ability.count({
-          where: {
-            OR: [
-              { ability_name: { contains: query } },
-              { ability_id: { contains: query } },
-              { tactic: { contains: query } },
-              { technique_name: { contains: query } },
-            ],
-          },
+          where: whereClause,
         }),
       ]);
 

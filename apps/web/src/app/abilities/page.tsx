@@ -10,7 +10,6 @@ import { AbilitiesTable } from "~/components/page/abilities/AbilitiesTable";
 
 const PAGE_SIZE = 10;
 
-// Use tRPC's type inference for better type safety
 export type AbilitiesListResponse = RouterOutputs["abilities"]["list"];
 
 export default function Abilities() {
@@ -27,7 +26,11 @@ export default function Abilities() {
     try {
       let response: AbilitiesListResponse | undefined;
       if (search) {
-        response = await trpc.abilities.search.query({ query: search });
+        response = await trpc.abilities.search.query({
+          query: search,
+          page,
+          pageSize: PAGE_SIZE,
+        });
       } else {
         response = await trpc.abilities.list.query({
           page,
