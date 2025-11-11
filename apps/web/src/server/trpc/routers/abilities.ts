@@ -70,47 +70,32 @@ export const abilitiesRouter = router({
     .query(async () => {
       const totalCount = await prisma.ability.count();
 
-      // Use findMany with select to get only the fields we need, then aggregate in memory
-      // This is more efficient than fetching all records
-      const [tactics, platforms, types] = await Promise.all([
-        prisma.ability.findMany({
-          select: { tactic: true },
-        }),
-        prisma.ability.findMany({
-          select: { platform: true },
-        }),
-        prisma.ability.findMany({
-          select: { type: true },
-        }),
-      ]);
-
-      // Aggregate tactics
+      // Fetch all abilities with tactic, platform, and type in a single query
+      const abilities = await prisma.ability.findMany({
+        select: { tactic: true, platform: true, type: true },
+      });
+      // Aggregate tactics, platforms, and types in one pass
       const tacticCounts: Record<string, number> = {};
-      tactics.forEach((item) => {
+      const platformCounts: Record<string, number> = {};
+      const typeCounts: Record<string, number> = {};
+      abilities.forEach((item) => {
         const tactic = item.tactic || "Unknown";
         tacticCounts[tactic] = (tacticCounts[tactic] || 0) + 1;
+        const platform = item.platform || "Unknown";
+        platformCounts[platform] = (platformCounts[platform] || 0) + 1;
+        const type = item.type || "Unknown";
+        typeCounts[type] = (typeCounts[type] || 0) + 1;
       });
+
       const byTactic = Object.entries(tacticCounts)
         .map(([name, value]) => ({ name, value }))
         .sort((a, b) => b.value - a.value)
         .slice(0, 8);
 
-      // Aggregate platforms
-      const platformCounts: Record<string, number> = {};
-      platforms.forEach((item) => {
-        const platform = item.platform || "Unknown";
-        platformCounts[platform] = (platformCounts[platform] || 0) + 1;
-      });
       const byPlatform = Object.entries(platformCounts)
         .map(([name, value]) => ({ name, value }))
         .sort((a, b) => b.value - a.value);
 
-      // Aggregate types
-      const typeCounts: Record<string, number> = {};
-      types.forEach((item) => {
-        const type = item.type || "Unknown";
-        typeCounts[type] = (typeCounts[type] || 0) + 1;
-      });
       const byType = Object.entries(typeCounts)
         .map(([name, value]) => ({ name, value }))
         .sort((a, b) => b.value - a.value)
